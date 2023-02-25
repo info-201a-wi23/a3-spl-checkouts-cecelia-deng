@@ -3,84 +3,80 @@ title: "A3: SPL Library Checkouts"
 output: html_document
 ---
 
+## Project title
+
+Trend of the checkouts number over time 
+
+### Authors
+
+- Qin Deng, qdeng2@uw.edu
+
+### Date
+
+2023 2/24
 ### Introduction
 
 An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
 
+I choose to  analyze the topic of "Monthly Item Borrowing Trends from the Library, 2017-2023." 
+
+Libraries have always played a vital role in society by providing access to information and resources for individuals to improve their education, skills, and knowledge. With the increasing digitalization of books and other resources, libraries have been adapting to new trends in borrowing and lending. The Monthly Item Borrowing Trends dataset from the library provides valuable insights into how patrons interact with the library's collection. This dataset includes information on the monthly borrowing trends of various items, including print books, audiobooks, eBooks, and more, from 2017 to 2023. Analyzing this dataset can help library administrators and staff better understand patrons' borrowing habits, identify popular and less popular items, and plan for future acquisitions and services. In this project, I will use R programming language to analyze this dataset, visualize trends over time, and gain insights into borrowing patterns. 
+
+I will analyze the checkout times in our group project. I am going to create some data visualization to help people compare and contrast data. Here are the questions that my project can answer.
+- What is the average number of checkouts for each Usageclass(Digital and Physical) ?
+- How has the number of print book checkouts changed over time?
+- What is the average number of checkouts for items in each year?
+- Which item type (e.g. BOOK, EBOOK, VIDEODISC, AUDIOBOOK) has the highest number of checkouts?
+- Are there any seasonal trends in item checkouts, and if so, which items are most affected?
+
+
+
 ### Summary Information
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
-
-These will likely be calculated using your DPLYR skills, answering questions such as:
-
-- What is the average number of checkouts for each item?
-- What is the month or year with the most/least checkouts for a book that you're interested in?
-- What is the month or year with the most/least checkouts for ebooks?
+```{r, echo = FALSE, warning = FALSE, code = readLines("summary.R")}
+source("summary.R") 
+```
+Questions:
+- What is the average number of checkouts for each Usageclass(Digital and Physical) ?
 - How has the number of print book checkouts changed over time?
+- What is the average number of checkouts for items in each year?
+- Which item type (e.g. BOOK, EBOOK, VIDEODISC) has the highest number of checkouts?
+- Are there any seasonal trends in item checkouts, and if so, which items are most affected?
 
-Feel free to calculate and report values that you find relevant.
+The initial summary information pertains to the average number of checkouts for each item. From this data, one can derive an approximate estimation of the number of checkouts per item and their relative ranking. Upon analysis, it was discovered that MIXED had the highest number of checkouts, with a value of 440.40856. The second summary information provides insights into the trend of the number of checkouts for print books. This data highlights a declining trend, indicating that as time passes, the demand for paper books is decreasing year by year. The third summary information pertains to the average number of checkouts for items each year. It was found that 2022 had the highest average number of checkouts, with a value of 25.27756. The fourth summary information conveys the highest number of checkouts recorded for any item, which is BOOK. The last piece of summary information pertains to the seasonal trends of checkouts. This data provides insights into how the number of checkouts varies across different seasons, allowing for a more comprehensive understanding of usage patterns.
 
 ### The Dataset
 
-- Who collected/published the data?  
-- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?
-- How was the data collected or generated?  
-- Why was the data collected?  
-- What, if any, ethical questions do you need to consider when working with this data?  
-- What are possible limitations or problems with this data?   (at least 200 words)
-
+The Seattle Library assembled and disseminated the pertinent data. The dataset includes data on the number of checkouts for various categories of books, as well as information on the dates that each type of book was circulated. The data's parameters are mainly concerned with the number of checkouts, the kind of book, and the date that each checkout occurred. The circulation system of the library, which automatically keeps track of the number of checkouts for each object, is how the data was gathered. The collected information was then published in an accessible format for access and evaluation. Using this data raises several ethical questions. Since the data contains information about the checkout histories of specific customers, it is crucial to make sure that the data has been anonymized to safeguard people's privacy. Furthermore, caution must be exercised to avoid drawing inferences or feeding stereotypes based on the materials most commonly borrowed. It would be incorrect to assume, for instance, that if a certain demographic group checks out a certain type of material disproportionately, this represents the interests or preferences of that group as a whole. This data has several restrictions and possible issues. One drawback is that the data does not include information about other libraries or reading material sources; it only includes information about checkouts from the Seattle Library system. Despite these drawbacks, the Seattle Library dataset offers insightful information about how users interact with the library's materials and can guide collection development decisions and other initiatives geared at fostering literacy and information access.
 
 ### First Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
 
-The first chart that you will create and include will show the trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
+```{r, echo = FALSE, warning = FALSE, code = readLines("Chart_1.R")}
+source("Chart_1.R")
+line_chart
 ```
+
+According to the graph, we can see "Fiction, Literature, Romance" has a larger amount of checkouts than others. Therefore, we can conclude that people prefer to read articles of Fiction, Literature, and Romance. Studying the trend of checkout items' subjects over time is to gain insights into the changing interests and preferences of library patrons. In order to make decisions about collection development and resource allocation, researchers can identify patterns and trends in readers' reading habits by examining the kinds of materials that people borrow from libraries. Researchers can learn more about the reading preferences of library users by looking at the categories that see more checkouts, like Fiction, Literature, and Romantic. For instance, it might imply that readers favor certain genres over others and are more apt to read for enjoyment.
 
 ### Second Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
-
-The second chart that you will create and include will show another trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+```{r, echo = FALSE, warning = FALSE, code = readLines("Chart_2.R")}
+source("Chart_2.R")
+bar_chart
 ```
+According to this graph, we can see that in the first three years, people have a larger demand for checkouts than other monthes. Thereofore, this graph allows us to see trends in the demand over time for various item categories, which can help libraries allocate their resources more effectively and prepare for seasonal variations in demand. For instance, the library can modify its inventory and resource allocation if it discovers that particular items are regularly checked out more frequently during particular seasons or months. To make sure that users have access to the materials they require, the library can prioritize acquiring or promoting certain kinds of materials during certain times of the year when they are more in demand.
+
 
 ### Your Choice
 
-The last chart is up to you. It could be a line plot, scatter plot, histogram, bar plot, stacked bar plot, and more. Here are some requirements to help guide your design:
 
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+```{r, echo = FALSE, warning = FALSE, code = readLines("Chart_3.R")}
+source("Chart_3.R")
+pie_chart
 ```
 
+As you can see from this chart, the type of physical is still more than the percentage of digital.This graph helps us comprehend the popularity and usage trends of the physical and digital resources in the library's collection. A variety of choices involving collection growth, budgeting, and resource allocation can be made using this information. For instance, the library might decide to devote more of its funding to digital materials if we discover that they are significantly more popular than physical resources. Alternately, if people prefer to use tangible resources, the library might decide to devote more funds to enhancing its physical collection. Additionally, by better knowing usage patterns, libraries can enhance their offerings and services to better serve their customers. For instance, the library may decide to devote more resources to acquiring similar materials if we discover that some kinds of digital materials are more popular than others. Additionally, the library may decide to buy extra copies of those materials or designate more shelf room for them if we discover that some physical resources are borrowed more frequently than others.
 
+install.packages('rsconnect')
+library(rsconnect)

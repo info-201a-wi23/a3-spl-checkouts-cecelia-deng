@@ -16,67 +16,55 @@ Trend of the checkouts number over time
 2023 2/24
 ### Introduction
 
-An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
-
-I choose to  analyze the topic of "Monthly Item Borrowing Trends from the Library, 2017-2023." 
-
-Libraries have always played a vital role in society by providing access to information and resources for individuals to improve their education, skills, and knowledge. With the increasing digitalization of books and other resources, libraries have been adapting to new trends in borrowing and lending. The Monthly Item Borrowing Trends dataset from the library provides valuable insights into how patrons interact with the library's collection. This dataset includes information on the monthly borrowing trends of various items, including print books, audiobooks, eBooks, and more, from 2017 to 2023. Analyzing this dataset can help library administrators and staff better understand patrons' borrowing habits, identify popular and less popular items, and plan for future acquisitions and services. In this project, I will use R programming language to analyze this dataset, visualize trends over time, and gain insights into borrowing patterns. 
+Libraries have always played a vital role in society by providing access to information and resources for individuals to improve their education, skills, and knowledge. With the increasing digitalization of books and other resources, libraries have been adapting to new trends in borrowing and lending. The Monthly Item Borrowing Trends data from the library provides valuable insights into how patrons interact with the library's collection. This data includes information on the monthly borrowing trends of various items, including print books, audiobooks, eBooks, and more, from 2017 to 2023. Analyzing this data can help library administrators and staff better understand patrons' borrowing habits, identify popular and less popular items, and plan for future acquisitions and services. In this project, I will use R programming language to analyze this data, visualize trends over time, and gain insights into borrowing patterns. And I calculate the data of LW_avg_checkout, JE_avg_checkout, JE_max_year, LM_max_year and EB_max_year.
 
 I will analyze the checkout times in our group project. I am going to create some data visualization to help people compare and contrast data. Here are the questions that my project can answer.
-- What is the average number of checkouts for each Usageclass(Digital and Physical) ?
-- How has the number of print book checkouts changed over time?
-- What is the average number of checkouts for items in each year?
-- Which item type (e.g. BOOK, EBOOK, VIDEODISC, AUDIOBOOK) has the highest number of checkouts?
-- Are there any seasonal trends in item checkouts, and if so, which items are most affected?
-
-
+- What is the average checkout number for Little Women?
+- What is the average checkout number for Jane Eyre? 
+- What is the year has the highest checkout number for Jane Eyre?
+- What is the year has the highest checkout number for Little Women?
+- What is the year has the highest checkout number for e-books?
 
 ### Summary Information
 
-```{r, echo = FALSE, warning = FALSE, code = readLines("summary.R")}
+```{r, echo = FALSE, message= FALSE, warning = FALSE, code = readLines("summary.R")}
 source("summary.R") 
 ```
-Questions:
-- What is the average number of checkouts for each Usageclass(Digital and Physical) ?
-- How has the number of print book checkouts changed over time?
-- What is the average number of checkouts for items in each year?
-- Which item type (e.g. BOOK, EBOOK, VIDEODISC) has the highest number of checkouts?
-- Are there any seasonal trends in item checkouts, and if so, which items are most affected?
 
-The initial summary information pertains to the average number of checkouts for each item. From this data, one can derive an approximate estimation of the number of checkouts per item and their relative ranking. Upon analysis, it was discovered that MIXED had the highest number of checkouts, with a value of 440.40856. The second summary information provides insights into the trend of the number of checkouts for print books. This data highlights a declining trend, indicating that as time passes, the demand for paper books is decreasing year by year. The third summary information pertains to the average number of checkouts for items each year. It was found that 2022 had the highest average number of checkouts, with a value of 25.27756. The fourth summary information conveys the highest number of checkouts recorded for any item, which is BOOK. The last piece of summary information pertains to the seasonal trends of checkouts. This data provides insights into how the number of checkouts varies across different seasons, allowing for a more comprehensive understanding of usage patterns.
+The first data I studied is the average checkout number for Little Women, which is the `r LW_avg_checkout` times. In the meantime, I also calculate the average number of Jane Eyre, which is the `r JE_avg_checkout`times. The reason I made them the subject of my research is that they share the same subject matter about the Feminist. And also I think the reason that Jane Eyre has a larger average checkout number is because the Jane Eyre movie aired and made people want to read the original book. Therefore I think it is good for us to compare them together. The third and forth values are about the year has the highest checkout number for Jane Eyre and Little Women, which are `r JE_max_year` and `r LM_max_year`. I believe these two statistics prove that more and more people are taking Woman's Rights seriously and want to read books about them to learn more about them. 
+The last value is the year has the highest checkout number for e-books, which is `r EB_max_year`.  I believe this trend can be attributed, in part, to the COVID-19 pandemic, which made it difficult for people to physically visit libraries. E-books offer a convenient and safe alternative that allows people to read from the comfort of their own homes, contributing to their growing popularity.
 
 ### The Dataset
 
-The Seattle Library assembled and disseminated the pertinent data. The dataset includes data on the number of checkouts for various categories of books, as well as information on the dates that each type of book was circulated. The data's parameters are mainly concerned with the number of checkouts, the kind of book, and the date that each checkout occurred. The circulation system of the library, which automatically keeps track of the number of checkouts for each object, is how the data was gathered. The collected information was then published in an accessible format for access and evaluation. Using this data raises several ethical questions. Since the data contains information about the checkout histories of specific customers, it is crucial to make sure that the data has been anonymized to safeguard people's privacy. Furthermore, caution must be exercised to avoid drawing inferences or feeding stereotypes based on the materials most commonly borrowed. It would be incorrect to assume, for instance, that if a certain demographic group checks out a certain type of material disproportionately, this represents the interests or preferences of that group as a whole. This data has several restrictions and possible issues. One drawback is that the data does not include information about other libraries or reading material sources; it only includes information about checkouts from the Seattle Library system. Despite these drawbacks, the Seattle Library dataset offers insightful information about how users interact with the library's materials and can guide collection development decisions and other initiatives geared at fostering literacy and information access.
+The Seattle Public Library provided the pertinent data of the checkouts of the physical and electronic books. The purpose of this data is to keep track of the total amount and the dates of checked books. The data includes data on the number of checkouts for various categories of books, as well as information on the dates that each type of book was circulated. The data parameters are mainly concerned with the number of checkouts, the kind of book, and the date that each checkout occurred. The circulation system of the library, which automatically keeps track of the number of checkouts for each object, is how the data was gathered. The collected information was then published in an accessible format for access and evaluation. Using this data raises several ethical questions. Since the data contains information about the checkout histories of specific customers, it is crucial to make sure that the data has been anonymized to safeguard people's privacy. Furthermore, caution must be exercised to avoid drawing inferences or feeding stereotypes based on the materials most commonly borrowed. It would be incorrect to assume, for instance, that if a certain demographic group checks out a certain type of material disproportionately, this represents the interests or preferences of that group as a whole. This data has several restrictions and possible issues. One drawback is that the data does not include information about other libraries or reading material sources; it only includes information about checkouts from the Seattle Library system. Despite these drawbacks, the Seattle Library dataset offers insightful information about how users interact with the library's materials and can guide collection development decisions and other initiatives geared at fostering literacy and information access.
 
 ### First Trends Over Time Chart
 
 
-```{r, echo = FALSE, warning = FALSE, code = readLines("Chart_1.R")}
+```{r, echo = FALSE, message= FALSE, warning = FALSE, code = readLines("Chart_1.R")}
 source("Chart_1.R")
-line_chart
+line_chart1
 ```
 
 According to the graph, we can see "Fiction, Literature, Romance" has a larger amount of checkouts than others. Therefore, we can conclude that people prefer to read articles of Fiction, Literature, and Romance. Studying the trend of checkout items' subjects over time is to gain insights into the changing interests and preferences of library patrons. In order to make decisions about collection development and resource allocation, researchers can identify patterns and trends in readers' reading habits by examining the kinds of materials that people borrow from libraries. Researchers can learn more about the reading preferences of library users by looking at the categories that see more checkouts, like Fiction, Literature, and Romantic. For instance, it might imply that readers favor certain genres over others and are more apt to read for enjoyment.
 
 ### Second Trends Over Time Chart
 
-```{r, echo = FALSE, warning = FALSE, code = readLines("Chart_2.R")}
+```{r, echo = FALSE, message= FALSE, warning = FALSE, code = readLines("Chart_2.R")}
 source("Chart_2.R")
-bar_chart
+line_chart2
 ```
-According to this graph, we can see that in the first three years, people have a larger demand for checkouts than other monthes. Thereofore, this graph allows us to see trends in the demand over time for various item categories, which can help libraries allocate their resources more effectively and prepare for seasonal variations in demand. For instance, the library can modify its inventory and resource allocation if it discovers that particular items are regularly checked out more frequently during particular seasons or months. To make sure that users have access to the materials they require, the library can prioritize acquiring or promoting certain kinds of materials during certain times of the year when they are more in demand.
-
+Based on the graph, it is evident that there has been a surge in the popularity of various types of materials from 2020 to 2022. One probable reason for this trend could be the impact of COVID-19, which has restricted people's outdoor activities, leading to an increased demand for home-based activities such as reading books, listening to audio books, and watching videos. Notably, physical books have witnessed a significant decline in checkouts, moving from the highest in 2018 to the second-lowest by 2022. Consequently, this data could aid libraries in tailoring their services to cater to the evolving trends in different material types. For instance, they can increase their collection of eBooks to meet the changing demands of their patrons. Furthermore, as consumer interests continue to shift away from videodiscs and books, libraries could consider reducing the purchase of such items and the number of staff assigned to serve them, thus enhancing cost-effectiveness.
 
 ### Your Choice
 
 
-```{r, echo = FALSE, warning = FALSE, code = readLines("Chart_3.R")}
+```{r, echo = FALSE, message= FALSE, warning = FALSE, code = readLines("Chart_3.R")}
 source("Chart_3.R")
-pie_chart
+line_chart3
 ```
 
-As you can see from this chart, the type of physical is still more than the percentage of digital.This graph helps us comprehend the popularity and usage trends of the physical and digital resources in the library's collection. A variety of choices involving collection growth, budgeting, and resource allocation can be made using this information. For instance, the library might decide to devote more of its funding to digital materials if we discover that they are significantly more popular than physical resources. Alternately, if people prefer to use tangible resources, the library might decide to devote more funds to enhancing its physical collection. Additionally, by better knowing usage patterns, libraries can enhance their offerings and services to better serve their customers. For instance, the library may decide to devote more resources to acquiring similar materials if we discover that some kinds of digital materials are more popular than others. Additionally, the library may decide to buy extra copies of those materials or designate more shelf room for them if we discover that some physical resources are borrowed more frequently than others.
+I included the chart to visually represent the trend of digital and physical items in the library over the years. The chart helps to showcase the changes in the popularity of each type of material and provides a clear comparison between the two. It helps to illustrate the significant decline in the use of physical items and the corresponding increase in the use of digital items. The chart reveals that in 2018, physical items were more popular than digital items in the library, with more than twice as many physical items checked out compared to digital items. However, from 2020 onwards, there has been a sharp decline in the use of physical items, with the number dropping to only 1/5 of the 2018 figure by 2022. In contrast, the use of digital items has been on a steady upward trend, with the number doubling from 2018 to 2022. The chart also highlights that the popularity of physical items has been decreasing steadily, while the popularity of digital items has been increasing at a faster rate. This trend suggests a shift in reading habits and library usage towards more convenient and accessible digital materials. Analyzing this trend can assist libraries in understanding the shift in UsageClass patterns, enabling them to reduce the supply of physical items and increase the supply of digital items. This strategic move can potentially result in increased profitability for libraries by catering to the changing needs and preferences of their patrons.
 
 install.packages('rsconnect')
 library(rsconnect)

@@ -1,15 +1,21 @@
 library(dplyr)
 library(ggplot2)
 
+Data_books <- read.csv("Library Dataset (Cleaned).csv")
+
 Data_books_sum <- Data_books %>%
-  group_by(MaterialType, CheckoutMonth) %>%
+  group_by(MaterialType, CheckoutYear) %>%
   summarise(total_checkouts = sum(Checkouts))
 
 Data_VBEAA <- Data_books_sum[Data_books_sum$MaterialType %in% c("VIDEODISC", "BOOK", "EBOOK", "AUDIOBOOK", "AUDIOBOOK"),]
 
-bar_chart <- ggplot(Data_VBEAA, aes(x = CheckoutMonth, y = total_checkouts)) +
-  geom_bar(stat = "identity", aes(fill = MaterialType)) +
-  labs(x = "Month", y = "Total checkouts", title = "The trend of Monthly checkouts by material types") +
-  scale_fill_brewer(palette = "Purples")
+line_chart2 <- ggplot(Data_VBEAA, aes(x=CheckoutYear, y=total_checkouts, color = MaterialType)) +
+  geom_line() +
+  xlab("Checkout Year") +
+  ylab("Total Number Of Checkouts") +
+  ggtitle("Change in Materials' Checkouts over Time from 2017-2023") +
+  labs(color = "MaterialType") +
+  scale_fill_brewer(palette = "Reds")
 
-bar_chart
+line_chart2
+

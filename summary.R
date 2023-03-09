@@ -3,13 +3,6 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-# Questions: 
-# - "What is the average number of checkouts for each Usageclass(Digital and Physical) ?"
-# - "How has the number of print book, ebooks and audiobook checkouts changed over time?" 
-# - "What is the average number of checkouts for items in each year?"
-# - "Which item type (e.g. BOOK, EBOOK, VIDEODISC) has the highest number of checkouts?"
-# - "Are there any seasonal trends in item checkouts, and if so, which items are most affected?"
-
 # Extract columns
 Data_books <- read.csv("Library Dataset (Cleaned).csv")
 
@@ -30,11 +23,56 @@ write.csv(unique_column, "MATERIAL_TYPE.csv", row.names = FALSE)
 mt_type <- read.csv('MATERIAL_TYPE.csv')
 #Data_books <- left_join(Data_books, mt_type) #MATERIAL_TYPE -> mt_type
 
-# Average number of checkouts for each item
-## avg_checkouts
-average_checkouts_by_item <- Data_books %>%
-  group_by(MaterialType) %>%
-  summarize(avg_checkouts = mean(Checkouts))
+# Average number of checkouts for Little Women
+LW_avg_checkout <- Data_books %>%
+  filter(Title == "Little Women") %>%
+  summarize(mean_checkout = mean(Checkouts)) %>%
+  pull(mean_checkout)
+LW_avg_checkout
+
+# Average number of checkouts for Jane Eyre
+JE_avg_checkout <- Data_books %>%
+  filter(Title == "Jane Eyre") %>%
+  summarize(mean_checkout = mean(Checkouts)) %>%
+  pull(mean_checkout)
+JE_avg_checkout
+
+# Group the data by year and Title of Jane Eyre, then find the maximum checkout number for each group
+JE_max_checkouts <- Data_books %>%
+  filter(Title == "Jane Eyre") %>%
+  group_by(CheckoutYear, Title) %>%
+  summarize(max_checkout = max(Checkouts))
+jane_eyre_checkouts <- subset(JE_max_checkouts, Title == "Jane Eyre")
+JE_max_index <- which.max(jane_eyre_checkouts$max_checkout)
+JE_max_year <- jane_eyre_checkouts$CheckoutYear[JE_max_index]
+JE_max_year
+
+# Group the data by year and Title of Little Women, then find the maximum checkout number for each group
+LW_max_checkouts <- Data_books %>%
+  filter(Title == "Little Women") %>%
+  group_by(CheckoutYear, Title) %>%
+  summarize(max_checkout = max(Checkouts))
+little_women_checkouts <- subset(LW_max_checkouts, Title == "Little Women")
+LM_max_index <- which.max(little_women_checkouts$max_checkout)
+LM_max_year <- little_women_checkouts$CheckoutYear[LM_max_index]
+LM_max_year
+
+# Average number of checkouts for EBOOK
+EB_avg_checkout <- Data_books %>%
+  filter(MaterialType == "EBOOK") %>%
+  summarize(mean_checkout = mean(Checkouts)) %>%
+  pull(mean_checkout)
+EB_avg_checkout
+
+# Group the data by year and EBOOK, then find the maximum checkout number for each group
+EB_max_checkouts <- Data_books %>%
+  filter(MaterialType == "EBOOK") %>%
+  group_by(CheckoutYear, MaterialType) %>%
+  summarize(max_checkout = max(Checkouts))
+ebook_checkouts <- subset(EB_max_checkouts, MaterialType == "EBOOK")
+EB_max_index <- which.max(ebook_checkouts$max_checkout)
+EB_max_year <- ebook_checkouts$CheckoutYear[EB_max_index]
+EB_max_year
 
 # Load data, show the total number do checkouts.
 Data_books_usage <- Data_books %>%
@@ -71,13 +109,13 @@ Data_books_sum <- Data_books %>%
 ## Data_VBEAA
 Data_VBEAA <- Data_books_sum[Data_books_sum$MaterialType %in% c("VIDEODISC", "BOOK", "EBOOK", "AUDIOBOOK", "AUDIOBOOK"),]
 
-# make a new colunm for the content of UsageClass and Checkouts
+# make a new column for the content of UsageClass and Checkouts
 ## data_usageclass
 data_usageclass <- Data_books %>%
   group_by(type = UsageClass) %>%
   summarise(checkouts = sum(Checkouts))
 
-# caculate the totoal checkouts number 
+# calculate the total checkouts number 
 ## total_checkouts
 total_checkouts = sum(data_usageclass$checkouts, na.rm = TRUE)
 
